@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Sans:wght@400;500&display=swap');
+.sk{position:relative;min-height:100vh;overflow:hidden;color:#fff;font-family:'DM Sans',system-ui,sans-serif;display:flex;justify-content:center;background:#2f7fd0}
+.sk *{box-sizing:border-box}
+.sk-abs{position:absolute;inset:0;pointer-events:none}
+.sk-fade{transition:opacity 2s ease}
+.sk-tint{transition:background 2s ease}
+
+/* Sun */
+.sk-body{position:absolute;border-radius:50%;transform:translate(-50%,-50%);
+ transition:top 3.2s cubic-bezier(.3,.7,.3,1),opacity 1.6s,width 1.6s,height 1.6s,background 1.6s,box-shadow 1.6s}
+.sk-sun{animation:glow 3.5s ease-in-out infinite alternate}
+@keyframes glow{from{filter:brightness(1)}to{filter:brightness(1.18)}}
+.sk-rays{position:absolute;inset:-130%;border-radius:50%;opacity:0;transition:opacity 1.5s;
+ background:repeating-conic-gradient(rgba(255,236,150,.42) 0 5deg,transparent 5deg 15deg);
+ -webkit-mask:radial-gradient(circle,#000 0%,transparent 68%);mask:radial-gradient(circle,#000 0%,transparent 68%);
+ animation:spin 50s linear infinite}
+.sk-rays.on{opacity:1}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Clouds (sized in em so one rule scales them) */
+.sk-cloud{position:absolute;height:.32em;border-radius:999px;background:var(--cl);transition:opacity 1.8s,background 1.8s}
+.sk-cloud::before,.sk-cloud::after{content:"";position:absolute;background:inherit;border-radius:50%}
+.sk-cloud::before{width:.5em;height:.5em;top:-.22em;left:.17em}
+.sk-cloud::after{width:.36em;height:.36em;top:-.15em;right:.19em}
+.sk-drift{animation:drift linear infinite}
+@keyframes drift{from{transform:translateX(-35vw)}to{transform:translateX(135vw)}}
+.sk-bank{position:absolute;left:0;right:0;top:0;height:16%;transition:opacity 1.8s}
+.sk-bank .sk-cloud{background:var(--bank);animation:bob 6s ease-in-out infinite alternate}
+@keyframes bob{from{transform:translateY(0)}to{transform:translateY(6px)}}
+
+/* Rain and snow */
+.sk-drop{position:absolute;top:11%;width:2px;height:18px;border-radius:2px;
+ background:linear-gradient(transparent,rgba(210,230,255,.85));animation:fall linear infinite;opacity:0}
+@keyframes fall{0%{transform:translateY(0);opacity:0}10%{opacity:1}100%{transform:translateY(88vh);opacity:.2}}
+.sk-flake{position:absolute;top:-12px;animation:snowfall linear infinite}
+.sk-flake i{display:block;border-radius:50%;background:#fff;animation:sway ease-in-out infinite alternate}
+@keyframes snowfall{to{transform:translateY(108vh)}}
+@keyframes sway{from{transform:translateX(-14px)}to{transform:translateX(14px)}}
+
+/* Heat haze */
+.sk-heat{background:linear-gradient(0deg,rgba(255,165,50,.5),rgba(255,210,120,.12) 40%,transparent 70%);
+ animation:haze 3s ease-in-out infinite alternate;transform-origin:bottom}
+@keyframes haze{from{transform:scaleY(.85);filter:blur(2px)}to{transform:scaleY(1.05);filter:blur(6px)}}
+
+/* Ground */
+.sk-hills{position:absolute;left:0;right:0;bottom:0;width:100%;height:26%;pointer-events:none}
+.sk-hills path{transition:fill 2s ease}
+
+/* UI */
+.sk-main{position:relative;z-index:5;width:100%;max-width:620px;padding:28px 14px 22px;display:flex;flex-direction:column;gap:14px}
+.sk-hero{padding:18px 4px 6px;text-shadow:0 2px 14px rgba(0,0,0,.35)}
+.sk-where{font-size:1rem;opacity:.9;margin:0}
+.sk-temp{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(4.2rem,17vw,7rem);line-height:.95;letter-spacing:-.04em;margin:4px 0}
+.sk-temp small{font-size:.4em;font-weight:500;letter-spacing:0;opacity:.85;margin-left:4px}
+.sk-hello{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(2rem,8.5vw,3rem);line-height:1.04;letter-spacing:-.03em;margin:4px 0 6px;max-width:15ch}
+.sk-wind{opacity:.92;margin:0}
+.sk-glass{background:rgba(15,25,40,.42);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.2);border-radius:20px}
+.sk-chat{height:300px;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.sk-empty{margin:auto;text-align:center;opacity:.8;max-width:280px}
+.sk-msg{max-width:84%;padding:10px 14px;border-radius:16px;line-height:1.5;white-space:pre-wrap}
+.sk-me{align-self:flex-end;background:#fff;color:#1b2735;border-bottom-right-radius:4px}
+.sk-bot{align-self:flex-start;background:rgba(255,255,255,.16);border-bottom-left-radius:4px}
+.sk-err{align-self:flex-start;background:rgba(255,90,80,.28);border:1px solid rgba(255,160,150,.6)}
+.sk-pills{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sk button{font:inherit;color:#fff;cursor:pointer;border-radius:999px;border:1px solid rgba(255,255,255,.4);background:rgba(15,25,40,.28);padding:7px 14px;transition:background .2s,transform .15s}
+.sk button:hover:not(:disabled){background:rgba(255,255,255,.28)}
+.sk button:active:not(:disabled){transform:scale(.96)}
+.sk button:disabled{opacity:.45;cursor:not-allowed}
+.sk button.on{background:#fff;color:#1b2735;font-weight:500}
+.sk button:focus-visible,.sk input:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.sk-bar{display:flex;gap:8px;padding:8px}
+.sk-bar input{flex:1;min-width:0;font:inherit;color:#fff;background:transparent;border:0;padding:8px 10px}
+.sk-bar input::placeholder{color:rgba(255,255,255,.6)}
+.sk-send{background:#fff!important;color:#1b2735!important;font-weight:500}
+.sk-coords{display:flex;gap:8px;flex-wrap:wrap}
+.sk-coords input{width:118px;font:inherit;color:#fff;background:rgba(15,25,40,.28);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:7px 14px}
+.sk-coords input::placeholder{color:rgba(255,255,255,.6)}
+.sk-note{font-size:.85rem;opacity:.9;margin:0;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+.sk-dots span{display:inline-block;width:7px;height:7px;margin-right:4px;border-radius:50%;background:#fff;animation:blink 1s infinite}
+.sk-dots span:nth-child(2){animation-delay:.15s}.sk-dots span:nth-child(3){animation-delay:.3s}
+@keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
+@media (prefers-reduced-motion:reduce){
+ .sk-drift,.sk-drop,.sk-flake,.sk-flake i,.sk-rays,.sk-sun,.sk-heat,.sk-bank .sk-cloud,.sk-dots span{animation:none}
+ .sk-body,.sk-fade,.sk-tint{transition:none}
+}
+
+/* Navbar */
+.sk-navbar{position:relative;z-index:6;width:100%;max-width:620px;padding:18px 18px 0;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.sk-brand{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.2rem;letter-spacing:-.02em;margin:0}
+.sk-brand-sub{font-size:.8rem;opacity:.85;margin:3px 0 0}
+.sk-navbar-mark{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);font-size:1.2rem}
+.sk-layout{position:relative;z-index:5;width:100%;display:flex;flex-direction:column;align-items:center}
+.sk-main{padding-top:16px}
+

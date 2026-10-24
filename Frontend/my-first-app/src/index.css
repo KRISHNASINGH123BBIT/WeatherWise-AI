@@ -1,0 +1,18 @@
+@import url("./css/global.css");
+
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body, #root {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100%;
+}
+
+body { min-height: 100vh; }
+button, input { box-sizing: border-box; }
+.sk-scene { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
